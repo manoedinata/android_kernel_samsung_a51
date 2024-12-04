@@ -2535,9 +2535,12 @@ write_tag_3_packet(char *dest, size_t *remaining_bytes,
 		memcpy(iv, hash_key, ECRYPTFS_DEFAULT_IV_BYTES);
 		memset(hash_key, 0, SHA256_HASH_SIZE);
 	}
-#endif
 	skcipher_request_set_crypt(req, src_sg, dst_sg,
 				   (*key_rec).enc_key_size, iv);
+#else
+	skcipher_request_set_crypt(req, src_sg, dst_sg,
+				   (*key_rec).enc_key_size, NULL);
+#endif
 	rc = crypto_skcipher_encrypt(req);
 	mutex_unlock(tfm_mutex);
 	skcipher_request_free(req);
