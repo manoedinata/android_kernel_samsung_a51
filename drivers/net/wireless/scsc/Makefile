@@ -142,15 +142,12 @@ ccflags-y += -Idrivers/misc/samsung/scsc
 ifneq ($(ANDROID_VERSION),)
 ANDROID_PLATFORM_VERSION=$(shell expr $(ANDROID_VERSION) / 10000)
 ccflags-y += -DSCSC_SEP_VERSION=$(ANDROID_PLATFORM_VERSION)
-$(info ANDROID_VERSION is $(ANDROID_VERSION))
 else
 ifneq ($(PLATFORM_VERSION),)
 ANDROID_PLATFORM_VERSION := $(basename $(PLATFORM_VERSION))
 ccflags-y += -DSCSC_SEP_VERSION=$(ANDROID_PLATFORM_VERSION)
-$(info PLATFORM_VERSION is $(PLATFORM_VERSION))
 endif
 endif
-$(info ANDROID_PLATFORM_VERSION is $(ANDROID_PLATFORM_VERSION))
 
 ## See drivers/misc/samsung/scsc/ Makefile for an explanation of the reasons
 ## of the following ifeq/else
